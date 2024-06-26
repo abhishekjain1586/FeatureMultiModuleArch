@@ -4,8 +4,9 @@ Understanding the multi module architecture as a mix of Feature based and layer 
 
 Structure:
 1. UI modules - Separate UI modules by features, contains the views(Activity, Fragment, ViewModel, XML, Jetpack Compose) based on features
-2. Domain modules - contains usecases realted to features
+2. Domain modules - contains usecases related to features
 3. Data modules - contains repositories implementation, data sources by features
+4. Common modules - contains reusable code, added to repective modules. Like reusable views can be added to ui modules whereever required.
 
 
 ```mermaid
@@ -29,7 +30,7 @@ graph TD;
     login_data-->app;
     articles_data-->app;
 ```
-Abstract APIs dependencies to the domains are resolved using **Dependency Injection (DI)**. They are supplied by 3rd party modules, here it is app module. The implementations or concrete classes dependencies are provided by Data modules and are added as dependencies to app module.
+Dependencies to the Abstract APIs of the domain module are resolved using **Dependency Injection (DI)**. They are supplied by 3rd party modules, here it is an app module. The implementations or concrete classes dependencies are provided by Data modules and are added as dependencies to app module. The DI creates and provides the implementation to the abstration to use cases in domain.
 
 ```mermaid
 graph TD;
