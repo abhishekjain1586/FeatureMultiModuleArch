@@ -1,5 +1,6 @@
 package com.example.featuremultimoduleapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,14 +17,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.example.featuremultimoduleapp.articlesui.viewmodel.ArticlesViewModel
-import com.example.featuremultimoduleapp.loginui.viewmodel.LoginViewModel
-import com.example.featuremultimoduleapp.ui.theme.FeatureMultiModuleAppTheme
+import com.example.featuremultimoduleapp.loginui.ui.LoginActivity
+import com.example.featuremultimoduleapp.mediator.IMediator
+import com.example.featuremultimoduleapp.uitheme.ui.theme.FeatureMultiModuleAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: ArticlesViewModel by viewModels()
+
+    @Inject lateinit var appMediator: IMediator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,7 +40,8 @@ class MainActivity : ComponentActivity() {
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding),
-                        onClick = viewModel::getArticles
+                        onClick = viewModel::getArticles,
+                        onClickLogin = ::launchLoginScreen
                     )
                 }
             }
@@ -41,18 +49,39 @@ class MainActivity : ComponentActivity() {
 
         viewModel.getArticles()
     }
+
+    private fun launchLoginScreen() {
+        ContextCompat.startActivity(
+            this@MainActivity,
+            Intent(this@MainActivity, LoginActivity::class.java),
+            null
+        )
+    }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
+fun Greeting(
+    name: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
+    onClickLogin: () -> Unit = {}
+) {
     Column {
         Text(
             text = "Hello $name!",
-            modifier = modifier.padding(bottom = 10.dp).align(alignment = Alignment.CenterHorizontally)
+            modifier = modifier
+                .padding(bottom = 10.dp)
+                .align(alignment = Alignment.CenterHorizontally)
         )
         Button(onClick = { onClick() }) {
             Text(
                 text = "Get Articles",
+                modifier = modifier
+            )
+        }
+        Button(onClick = { onClickLogin() }) {
+            Text(
+                text = "Launch Login screen",
                 modifier = modifier
             )
         }

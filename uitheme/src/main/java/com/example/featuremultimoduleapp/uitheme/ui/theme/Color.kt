@@ -1,4 +1,4 @@
-package com.example.featuremultimoduleapp.ui.theme
+package com.example.featuremultimoduleapp.uitheme.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

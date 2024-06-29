@@ -9,7 +9,6 @@ class GetArticlesUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke() {
-        Log.d("testingggg", "ArticlesRepository - ${articlesRepository.hashCode()}")
         articlesRepository.getArticles()
     }
 }

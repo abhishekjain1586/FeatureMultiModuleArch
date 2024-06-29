@@ -14,7 +14,7 @@ class ArticlesViewModel @Inject constructor(
 ) : ViewModel() {
 
     init {
-        Log.d("testingggg", "GetArticlesUseCase - ${articlesUseCase.hashCode()}")
+
     }
 
     fun getArticles() {

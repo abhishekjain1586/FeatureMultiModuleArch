@@ -29,19 +29,35 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.5.1'
+    }
 }
 
 dependencies {
     // Module dependencies
     implementation project(':logindomain')
 
+    // UI theme dependency
+    implementation project(':uitheme')
+
+    // Mediator dependency
+    implementation project(':mediator')
+
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
     implementation libs.lifecycle.viewmodel
+    implementation libs.androidx.activity.compose
+    implementation libs.androidx.material3
 
     // Dagger Hilt
     implementation libs.dagger.hilt.android
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
     kapt libs.dagger.hilt.compiler
 
     testImplementation libs.junit
