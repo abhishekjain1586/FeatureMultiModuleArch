@@ -53,6 +53,7 @@ dependencies {
     implementation libs.lifecycle.viewmodel
     implementation libs.androidx.activity.compose
     implementation libs.androidx.material3
+    implementation libs.androidx.ui.tooling.preview
 
     // Dagger Hilt
     implementation libs.dagger.hilt.android
