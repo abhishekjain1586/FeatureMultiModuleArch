@@ -81,6 +81,8 @@ fun LoginScreen(
             TextField(value = "test", onValueChange = {})
         }
 
+        Spacer(modifier = Modifier.height(10.dp))
+
         Button(onClick = { onClick() }) {
             Text(
                 text = "Login",
