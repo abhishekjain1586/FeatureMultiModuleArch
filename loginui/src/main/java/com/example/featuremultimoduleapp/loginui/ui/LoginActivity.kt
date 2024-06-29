@@ -39,9 +39,7 @@ class LoginActivity : ComponentActivity() {
 
         setContent {
             FeatureMultiModuleAppTheme {
-                LoginScreen(
-                    name = "Android"
-                )
+                LoginScreen()
             }
         }
 
@@ -53,7 +51,6 @@ class LoginActivity : ComponentActivity() {
 
 @Composable
 fun LoginScreen(
-    name: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     onClickLogin: () -> Unit = {}
@@ -84,31 +81,19 @@ fun LoginScreen(
             TextField(value = "test", onValueChange = {})
         }
 
-        /*Row {
-            Column {
-                Text(
-                    text = "Username",
-                    modifier = modifier
-                        .align(alignment = Alignment.CenterHorizontally)
-                )
-                Text(
-                    text = "Password",
-                    modifier = modifier
-                        .align(alignment = Alignment.CenterHorizontally)
-                )
-            }
-            Spacer(modifier = Modifier.width(10.dp))
-            Column {
-                TextField(value = "a@a.com", onValueChange = {})
-                TextField(value = "test", onValueChange = {})
-            }
-        }*/
-
         Button(onClick = { onClick() }) {
             Text(
                 text = "Login",
                 modifier = modifier
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    FeatureMultiModuleAppTheme {
+        LoginScreen("Android")
     }
 }
