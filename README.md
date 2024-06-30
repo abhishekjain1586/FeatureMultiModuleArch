@@ -2,7 +2,8 @@
 
 Understanding the multi module architecture as a mix of Feature based and layer based for Android application.
 
-Structure:
+**Design**
+<br/>
 1. UI modules - Separate UI modules by features, contains the views(Activity, Fragment, ViewModel, XML, Jetpack Compose) based on features
 2. Domain modules - contains usecases related to features
 3. Data modules - contains repositories implementation, data sources by features
@@ -38,3 +39,22 @@ graph TD;
     network_module-->articles_data;
 ```
 There might be other core or common modules depending on the situations, and based on requirement they are added as dependencies to other modules. Here network module is added as dependencies to Data modules to provide network related objects like Retrofit. There can be resuable UIs to be used among different UI modules so they will be added as dependencies to UI modules.
+
+<br/><br/>
+**Interation between UI modules**
+<br/><br/>
+UI modules cannot interact with each other directly. So in order to communicate we require a separate common module, can be termed as **Mediator** module. This module is an abstract just like the Domain module which provides the interfaces and added as dependency to the UI modules.
+```mermaid
+graph TD;
+    mediator-->login_ui;
+    mediator-->articles_ui;
+```
+
+Here the mediator between all the UI modules is our **app** module, which has access to all the UI for the application.
+<br/>
+A class inside app module to be created which provides the implementation to the mediator module used by UI modules. The dependency of this implementation class is provided using the DI to the UI modules. UI module (like activites or fragments) injects the dependency and trigger the navigation to other Android components (Activities/Fragment).
+```mermaid
+graph TD;
+    mediator-->app;
+```
+
