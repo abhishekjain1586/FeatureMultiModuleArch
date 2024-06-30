@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -28,7 +29,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginActivity : ComponentActivity() {
 
-    @Inject lateinit var appNavigator: IMediator
+    @Inject lateinit var appMediator: IMediator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class LoginActivity : ComponentActivity() {
 
         setContent {
             FeatureMultiModuleAppTheme {
-                LoginScreen()
+                LoginScreen(onLogin = ::launchArticles)
             }
         }
 
@@ -45,20 +46,27 @@ class LoginActivity : ComponentActivity() {
             appNavigator.navigateToArticles()
         }*/
     }
+
+    private fun launchArticles() {
+        appMediator.navigateToArticles(this)
+    }
 }
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
-    onClickLogin: () -> Unit = {}
+    onLogin: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp, end = 10.dp)
+        ) {
             Text(
                 text = "Username",
                 modifier = Modifier.align(Alignment.CenterVertically)
@@ -70,12 +78,11 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(10.dp))
 
         Row(
-            modifier = Modifier.fillMaxWidth()/*.background(color = Color.Red)*/,
-            horizontalArrangement = Arrangement.Center
+            modifier = Modifier.padding(start = 10.dp, end = 10.dp)
         ) {
             Text(
                 text = "Pass",
-                modifier = Modifier.align(Alignment.CenterVertically)/*.background(color = Color.Blue)*/
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
             Spacer(modifier = Modifier.width(10.dp))
             TextField(value = "test", onValueChange = {})
@@ -83,7 +90,7 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Button(onClick = { onClick() }) {
+        Button(onClick = { onLogin() }) {
             Text(
                 text = "Login",
                 modifier = modifier
