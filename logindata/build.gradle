@@ -35,6 +35,7 @@ dependencies {
     // Module dependencies
     implementation project(':logindomain')
     implementation project(':network')
+    implementation project(':common')
 
     // Dagger Hilt
     implementation libs.dagger.hilt.android

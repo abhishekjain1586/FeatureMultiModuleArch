@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.dagger.hilt.android)
-    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.example.featuremultimoduleapp.articlesdata'
+    namespace 'com.example.featuremultimoduleapp.common'
     compileSdk 34
 
     defaultConfig {
@@ -32,21 +30,15 @@ android {
 }
 
 dependencies {
-    // Module dependencies
-    implementation project(':articlesdomain')
-    implementation project(':network')
-    implementation project(':common')
 
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
 
-    // Dagger Hilt
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
-
     // Retrofit
     implementation libs.retrofit2.retrofit
+
+    implementation libs.kotlinx.serialization.json
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit

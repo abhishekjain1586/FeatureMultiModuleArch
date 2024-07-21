@@ -68,24 +68,54 @@ fun LoginScreen(
                 .padding(start = 10.dp, end = 10.dp)
         ) {
             Text(
-                text = "Username",
-                modifier = Modifier.align(Alignment.CenterVertically)
+                text = "Username lksnlksdfnsd lsdnflds fsd lsndfldsnfsd  lsdnflkdsf slkdfndlskf",
+                modifier = Modifier.weight(0.5f)
             )
             Spacer(modifier = Modifier.width(10.dp))
-            TextField(value = "a@a.com", onValueChange = {})
+            Text(
+                text = "Testing sdsdfsdfsdf sdsfsdfdsf ksbksdfjsds,dfsdklsdf",
+                modifier = Modifier.weight(0.5f)
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp, end = 10.dp),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Username",
+                modifier = Modifier.weight(0.25f)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            TextField(
+                modifier = Modifier.weight(0.75f),
+                value = "a@a.com",
+                onValueChange = {}
+            )
         }
 
         Spacer(modifier = Modifier.height(10.dp))
 
         Row(
-            modifier = Modifier.padding(start = 10.dp, end = 10.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp, end = 10.dp),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "Pass",
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.weight(0.25f)
             )
             Spacer(modifier = Modifier.width(10.dp))
-            TextField(value = "test", onValueChange = {})
+            TextField(
+                modifier = Modifier.weight(0.75f),
+                value = "test",
+                onValueChange = {}
+            )
         }
 
         Spacer(modifier = Modifier.height(10.dp))
